@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUrl } from './components/redux/action';
+import { useGetStatus } from './hooks/useGetStatus';
+import { useGetData } from './hooks/useGetData';
 
 function App(): React.JSX.Element {
 
@@ -11,11 +13,14 @@ function App(): React.JSX.Element {
     dispatch(updateUrl(url))
   }
 
+  const [data, isLoading, error] = useGetData();
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Test application</Text>
-      <UrlDisplay />
-      <Button title="Test Update" onPress={() => handleUpdateUrl("newUrl")} />
+      <Text style={styles.text}>{error ? "Error" : data?.trafficLightColor} </Text>
+      <Button title="Test Update" onPress={() => handleUpdateUrl("http://192.168.1.19:5000")} />
     </View>
   );
 }

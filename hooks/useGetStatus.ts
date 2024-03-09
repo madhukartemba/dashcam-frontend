@@ -5,7 +5,7 @@ export type Status = {
     startup: true | false
 };
 
-export function useGetData(): [Status | null, boolean, Error | null] {
+export function useGetStatus(): [Status | null, boolean, Error | null] {
 
     const url = useSelector((state: any) => state.urlReducer)
     const interval = useSelector((state: any) => state.intervalReducer)
@@ -22,6 +22,7 @@ export function useGetData(): [Status | null, boolean, Error | null] {
                 const result = await response.json();
                 setData(result);
                 setIsLoading(false);
+                setError(null)
             } catch (error: any) {
                 setError(error);
                 setIsLoading(false);

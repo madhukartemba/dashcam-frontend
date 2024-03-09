@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export type Data = {
-    lightColor: 'red' | 'green' | 'yellow' | null;
+    trafficLightColor: 'red' | 'green' | 'yellow' | null;
     fps: number;
 };
 
@@ -23,6 +23,7 @@ export function useGetData(): [Data | null, boolean, Error | null] {
                 const result = await response.json();
                 setData(result);
                 setIsLoading(false);
+                setError(null)
             } catch (error: any) {
                 setError(error);
                 setIsLoading(false);

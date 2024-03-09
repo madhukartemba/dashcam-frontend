@@ -1,0 +1,33 @@
+import React from 'react';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+
+const SettingsButton = () => {
+    const handlePress = () => {
+        // Handle button press
+    };
+
+    return (
+        <TouchableOpacity style={styles.container} onPress={handlePress}>
+            <Image
+                source={require('./settingsIcon.png')}
+                style={[styles.icon, { tintColor: 'white' }]}
+            />
+        </TouchableOpacity>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        height: 30,
+        width: 30,
+        padding: 4,
+        borderRadius: 5,
+        backgroundColor: 'black',
+    },
+    icon: {
+        width: 24,
+        height: 24,
+    },
+});
+
+export default SettingsButton;

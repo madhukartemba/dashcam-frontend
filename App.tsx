@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateUrl } from './components/redux/action';
 import TrafficLight from './components/TrafficLight';
 import SettingsButton from './components/Settings/SettingsButton/SettingsButton';
+import DateTimeDisplay from './components/DateTimeDisplay';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,9 @@ function App() {
             }}
           />
         </View>
-        <View style={styles.rightContent} />
+        <View style={styles.rightContent} >
+          <DateTimeDisplay />
+        </View>
       </View>
     </View>
   );

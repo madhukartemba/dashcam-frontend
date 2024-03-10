@@ -5,7 +5,7 @@ import { updateUrl } from './components/redux/action';
 import TrafficLight from './components/Inference/TrafficLight';
 import SettingsButton from './components/Settings/SettingsButton/SettingsButton';
 import DateTimeDisplay from './components/DateTimeDisplay';
-import SoundManager from './SoundManager';
+import SoundManager from './components/sound/SoundManager';
 
 function App() {
   const dispatch = useDispatch();

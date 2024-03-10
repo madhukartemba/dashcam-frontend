@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export type Data = {
+    status: 'inference' | 'recovery' | 'idle';
+    recoveryPercent: number;
     trafficLightColor: 'red' | 'green' | 'yellow' | null;
     fps: number;
 };
@@ -19,7 +21,7 @@ export function useGetData(): [Data | null, boolean, Error | null] {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`${url}/data`);
+                const response = await fetch(`${url}`);
                 const result = await response.json();
                 setData(result);
                 setIsLoading(false);

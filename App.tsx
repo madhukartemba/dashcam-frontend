@@ -27,6 +27,8 @@ function App() {
         <View style={styles.leftContent}>
           <TrafficLight
             data={{
+              status: 'inference',
+              recoveryPercent: 100,
               trafficLightColor: 'red',
               fps: 10,
             }}

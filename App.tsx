@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateUrl } from './components/redux/action';
-import TrafficLight from './components/DashcamComponent/TrafficLight';
+import TrafficLight from './components/Inference/TrafficLight';
 import SettingsButton from './components/Settings/SettingsButton/SettingsButton';
 import DateTimeDisplay from './components/DateTimeDisplay';
 import SoundManager from './SoundManager';

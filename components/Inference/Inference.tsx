@@ -6,14 +6,10 @@ import TrafficLight from './TrafficLight';
 
 
 export const Inference = () => {
-    const [data, isLoading, error] = useGetData();
-
-    if (isLoading) {
-        return <Loading text="connecting" />;
-    }
+    const [data, error] = useGetData();
 
     if (error) {
-        return <Loading text="connecting" />;
+        return <Loading text="Connecting" />;
     }
 
     if (data) {

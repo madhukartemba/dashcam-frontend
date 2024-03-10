@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Data } from '../hooks/useGetData';
+import { Data } from '../../hooks/useGetData';
 
 type Props = {
     data: Data;

@@ -33,7 +33,7 @@ export const Inference = () => {
     if (data) {
         switch (data.status) {
             case 'recovery':
-                return <Loading text={`Recovering video ${data.recoveryPercent}%`} />;
+                return <Loading text={`Recovering video ${parseFloat(data.recoveryPercent.toFixed(2))}%`} />;
             case 'inference':
                 actionsInstance.act(data.trafficLightColor);
                 actionsInstance.updateBufferSize(ACTIONS_BUFFER_SIZE_MULTIPLIER * data.fps);

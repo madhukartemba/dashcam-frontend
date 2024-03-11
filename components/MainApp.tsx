@@ -22,10 +22,10 @@ function MainApp({ navigation }: Props) {
             </View>
             <View style={styles.contentContainer}>
                 <View style={styles.leftContent}>
-                    <Inference />
+                    <DateTimeDisplay />
                 </View>
                 <View style={styles.rightContent}>
-                    <DateTimeDisplay />
+                    <Inference />
                 </View>
             </View>
         </View>

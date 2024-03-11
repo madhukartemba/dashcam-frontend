@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     trafficLight: {
-        width: 50,
-        height: 150,
+        width: 60,
+        height: 160,
         backgroundColor: 'black',
-        borderWidth: 1,
-        borderRadius: 10,
+        borderWidth: 4,
+        borderRadius: 15,
         padding: 5,
         borderColor: 'white',
         flexDirection: 'column',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
     },
     green: {
-        backgroundColor: 'green',
+        backgroundColor: '#3cd64e',
     },
     yellow: {
         backgroundColor: 'yellow',

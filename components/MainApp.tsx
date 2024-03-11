@@ -49,11 +49,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     leftContent: {
-        flex: 0.3,
+        flex: 1,
         backgroundColor: 'black',
+        justifyContent: 'center',
     },
     rightContent: {
-        flex: 1,
+        flex: 0.3,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',

@@ -4,6 +4,7 @@ import Loading from '../Loading';
 import TrafficLight from './TrafficLight';
 import { ActionMap, Actions } from './Actions';
 import SoundManager from '../sound/SoundManager';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 const ACTIONS_BUFFER_SIZE_MULTIPLIER = 10
 
@@ -21,6 +22,11 @@ export const Inference = () => {
 
 
     if (error) {
+
+        if (error.name == 'AbortError') {
+            return <ErrorPage text='Request Aborted' />
+        }
+
         return <Loading text="Connecting" />;
     }
 

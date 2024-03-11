@@ -20,17 +20,25 @@ export function useGetData(): { data: Data | null, isLoading: boolean, error: Er
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+
             try {
-                const response = await fetch(`${url}`);
+                const response = await fetch(url, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
                 const result = await response.json();
                 setData(result);
-                setIsLoading(false);
-                setError(null)
+                setError(null);
             } catch (error: any) {
-                setError(error);
+                setError(error)
+            } finally {
                 setIsLoading(false);
             }
         };
+
 
         fetchData();
 

@@ -1,74 +1,33 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { updateUrl } from './components/redux/action';
-import TrafficLight from './components/Inference/TrafficLight';
-import SettingsButton from './components/Settings/SettingsButton/SettingsButton';
-import DateTimeDisplay from './components/DateTimeDisplay';
-import SoundManager from './components/sound/SoundManager';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainApp from './components/MainApp';
+import Settings from './components/Settings/Setttings';
+
+
+
+export type RootStackParamList = {
+  MainApp: undefined,
+  Settings: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
-  const dispatch = useDispatch();
 
-  const handleUpdateUrl = (url: string) => {
-    dispatch(updateUrl(url));
-  };
-
-  const playSound = () => {
-    SoundManager.playStartupSound()
-  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.settingsContainer}>
-        <SettingsButton />
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.leftContent}>
-          <TrafficLight
-            data={{
-              status: 'inference',
-              recoveryPercent: 100,
-              trafficLightColor: 'red',
-              fps: 10,
-            }}
-          />
-        </View>
-        <View style={styles.rightContent}>
-          <DateTimeDisplay />
-          <Button title='Play sound' onPress={playSound} />
-        </View>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='MainApp' >
+        <Stack.Screen options={{ headerShown: false }} name='MainApp' component={MainApp} />
+        <Stack.Screen options={{
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white'
+        }} name='Settings' component={Settings} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'black',
-  },
-  settingsContainer: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
-    zIndex: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  leftContent: {
-    flex: 0.3,
-    backgroundColor: 'blue',
-  },
-  rightContent: {
-    flex: 1,
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const SettingsButton = () => {
-    const handlePress = () => {
-        // Handle button press
-    };
+type Props = {
+    handlePress: () => void;
+}
+
+const SettingsButton = ({ handlePress }: Props) => {
 
     return (
         <TouchableOpacity style={styles.container} onPress={handlePress}>

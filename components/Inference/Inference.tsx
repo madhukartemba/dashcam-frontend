@@ -13,15 +13,16 @@ const actionsInstance = new Actions(ActionMap);
 export const Inference = () => {
     const { data, error } = useGetData();
 
-    if (error) {
-        return <Loading text="Connecting" />;
-    }
-
     useEffect(() => {
         if (data && data.status == 'inference') {
             SoundManager.playStartupSound()
         }
     }, [data?.status])
+
+
+    if (error) {
+        return <Loading text="Connecting" />;
+    }
 
     if (data) {
         switch (data.status) {

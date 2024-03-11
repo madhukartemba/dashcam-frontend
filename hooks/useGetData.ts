@@ -8,7 +8,7 @@ export type Data = {
     fps: number;
 };
 
-export function useGetData(): [Data | null, boolean, Error | null] {
+export function useGetData(): { data: Data | null, isLoading: boolean, error: Error | null } {
 
     const url = useSelector((state: any) => state.urlReducer)
     const interval = useSelector((state: any) => state.intervalReducer)
@@ -41,6 +41,6 @@ export function useGetData(): [Data | null, boolean, Error | null] {
         };
     }, [url, interval]);
 
-    return [data, isLoading, error];
+    return { data, isLoading, error };
 }
 

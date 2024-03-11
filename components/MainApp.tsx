@@ -13,16 +13,6 @@ import { Inference } from './Inference/Inference';
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 
 function MainApp({ navigation }: Props) {
-    const dispatch = useDispatch();
-
-    const handleUpdateUrl = (url: string) => {
-        dispatch(updateUrl(url));
-    };
-
-    const playSound = () => {
-        SoundManager.playStartupSound()
-    };
-
     return (
         <View style={styles.container}>
             <View style={styles.settingsContainer}>

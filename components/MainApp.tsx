@@ -8,6 +8,7 @@ import { updateUrl } from './redux/action';
 import SoundManager from './sound/SoundManager';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
+import { Inference } from './Inference/Inference';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 
@@ -31,14 +32,7 @@ function MainApp({ navigation }: Props) {
             </View>
             <View style={styles.contentContainer}>
                 <View style={styles.leftContent}>
-                    <TrafficLight
-                        data={{
-                            status: 'inference',
-                            recoveryPercent: 100,
-                            trafficLightColor: 'red',
-                            fps: 10,
-                        }}
-                    />
+                    <Inference />
                 </View>
                 <View style={styles.rightContent}>
                     <DateTimeDisplay />

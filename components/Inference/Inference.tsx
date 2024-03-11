@@ -33,13 +33,13 @@ export const Inference = () => {
     if (data) {
         switch (data.status) {
             case 'recovery':
-                return <Loading text={`Recovering video ${parseFloat(data.recoveryPercent.toFixed(2))}%`} />;
+                return <Loading text={`Recovering ${parseFloat(data.recoveryPercent.toFixed(2))}%`} />;
             case 'inference':
                 actionsInstance.act(data.trafficLightColor);
                 actionsInstance.updateBufferSize(ACTIONS_BUFFER_SIZE_MULTIPLIER * data.fps);
                 return <TrafficLight data={data} />;
             case 'idle':
-                return <Loading text={`Server is idle`} />;
+                return <ErrorPage text={`Server is idle`} />;
             default:
                 return null;
         }

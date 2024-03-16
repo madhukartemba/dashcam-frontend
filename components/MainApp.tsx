@@ -27,7 +27,7 @@ function MainApp({ navigation }: Props) {
                     <MediaControls />
                 </View>
                 <View style={styles.rightContent}>
-                    {/* <Inference /> */}
+                    <Inference />
                 </View>
             </View>
         </View>

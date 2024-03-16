@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
 import DateTimeDisplay from './DateTimeDisplay';
-import TrafficLight from './Inference/TrafficLight';
 import SettingsButton from './Settings/SettingsButton/SettingsButton';
-import { updateUrl } from './redux/action';
-import SoundManager from './sound/SoundManager';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { Inference } from './Inference/Inference';

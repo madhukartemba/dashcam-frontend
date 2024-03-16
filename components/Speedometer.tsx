@@ -8,6 +8,7 @@ type Props = {
 
 const Speedometer = ({ speedKmph }: Props) => {
 
+
     if (speedKmph == null) {
         return (
             <View style={styles.container}>
@@ -17,9 +18,11 @@ const Speedometer = ({ speedKmph }: Props) => {
         );
     }
 
+    const speed = speedKmph.toFixed(0);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{speedKmph}</Text>
+            <Text style={styles.text}>{speed}</Text>
             <Text style={styles.unit}> km/hr</Text>
         </View>
     );

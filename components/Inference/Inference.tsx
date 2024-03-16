@@ -5,6 +5,7 @@ import TrafficLight from './TrafficLight';
 import { ActionMap, Actions } from './Actions';
 import SoundManager from '../sound/SoundManager';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import ProgressBarComponent from '../ProgressBar';
 
 const ACTIONS_BUFFER_SIZE_MULTIPLIER = 10
 
@@ -33,7 +34,7 @@ export const Inference = () => {
     if (data) {
         switch (data.status) {
             case 'recovery':
-                return <Loading text={`Recovering ${(data.recoveryPercent).toFixed(2)}%`} />;
+                return <ProgressBarComponent text={`Recovering`} progress={data.recoveryPercent} />;
             case 'inference':
                 actionsInstance.act(data.trafficLightColor);
                 return <TrafficLight data={data} />;

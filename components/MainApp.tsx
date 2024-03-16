@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { Inference } from './Inference/Inference';
 import MediaControls from './MediaControls/MediaButtons';
+import Speedometer from './Speedometer';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 
@@ -28,6 +29,9 @@ function MainApp({ navigation }: Props) {
                 </View>
                 <View style={styles.rightContent}>
                     <Inference />
+                    <View style={styles.speedometer}>
+                        <Speedometer />
+                    </View>
                 </View>
             </View>
         </View>
@@ -59,9 +63,12 @@ const styles = StyleSheet.create({
     rightContent: {
         flex: 0.3,
         backgroundColor: 'black',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
+    speedometer: {
+        flex: 0.5
+    }
 });
 
 export default MainApp;

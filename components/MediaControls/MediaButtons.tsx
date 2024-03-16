@@ -19,6 +19,7 @@ const MediaControls = () => {
     const onPress = async (action: string) => {
         if (action === 'playPause') {
             await MediaModule.playPauseMedia();
+            setIsPlaying((isPlaying) => !isPlaying);
         } else if (action === 'nextTrack') {
             await MediaModule.skipToNextTrack();
         } else if (action === 'previousTrack') {
@@ -33,7 +34,7 @@ const MediaControls = () => {
                 .catch((error: unknown) => {
                     console.error(error);
                 });
-        }, 1200);
+        }, 1500);
     };
 
 

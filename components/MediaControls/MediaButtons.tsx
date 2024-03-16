@@ -1,10 +1,10 @@
 import React from 'react';
-import { NativeModules, Button, View, StyleSheet } from 'react-native';
+import { NativeModules, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+
 const { MediaModule } = NativeModules;
 
-const NewModuleButton = () => {
+const MediaControls = () => {
     const onPress = (action: string) => {
-        console.log('We will invoke the native module here!');
         if (action === 'playPause') {
             MediaModule.playPauseMedia();
         } else if (action === 'nextTrack') {
@@ -16,21 +16,30 @@ const NewModuleButton = () => {
 
     return (
         <View style={styles.container}>
-            <Button
-                title="Play/Pause"
-                color="#841584"
-                onPress={() => onPress('playPause')}
-            />
-            <Button
-                title="Next Track"
-                color="#841584"
-                onPress={() => onPress('nextTrack')}
-            />
-            <Button
-                title="Previous Track"
-                color="#841584"
+            <TouchableOpacity
                 onPress={() => onPress('previousTrack')}
-            />
+                style={styles.button}>
+                <Image
+                    source={require('./backward-step-solid.png')}
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => onPress('playPause')}
+                style={styles.button}>
+                <Image
+                    source={require('./play-solid.png')}
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => onPress('nextTrack')}
+                style={styles.button}>
+                <Image
+                    source={require('./forward-step-solid.png')}
+                    style={styles.icon}
+                />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -38,9 +47,17 @@ const NewModuleButton = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: 20,
+        justifyContent: 'space-between',
+    },
+    button: {
+        paddingHorizontal: 70,
+        paddingVertical: 30,
+    },
+    icon: {
+        width: 60,
+        height: 70,
+        tintColor: 'white',
     },
 });
 
-export default NewModuleButton;
+export default MediaControls;

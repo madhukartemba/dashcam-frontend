@@ -9,7 +9,7 @@ import SoundManager from './sound/SoundManager';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { Inference } from './Inference/Inference';
-import NewModuleButton from './MediaControls/MediaButtons';
+import MediaControls from './MediaControls/MediaButtons';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 
@@ -24,7 +24,7 @@ function MainApp({ navigation }: Props) {
             <View style={styles.contentContainer}>
                 <View style={styles.leftContent}>
                     <DateTimeDisplay />
-                    <NewModuleButton />
+                    <MediaControls />
                 </View>
                 <View style={styles.rightContent}>
                     {/* <Inference /> */}
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     leftContent: {
         flex: 1,
         backgroundColor: 'black',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
+        alignItems: 'center'
     },
     rightContent: {
         flex: 0.3,

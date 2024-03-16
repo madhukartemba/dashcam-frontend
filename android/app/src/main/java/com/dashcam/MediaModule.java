@@ -5,6 +5,8 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -14,6 +16,7 @@ public class MediaModule extends ReactContextBaseJavaModule {
         super(context);
     }
 
+    @NonNull
     @Override
     public String getName() {
         return "MediaModule";
@@ -23,17 +26,8 @@ public class MediaModule extends ReactContextBaseJavaModule {
     public void playPauseMedia() {
         AudioManager audioManager = (AudioManager) getReactApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
-            if (audioManager.isMusicActive()) {
-                // Media is currently playing, pause it
-                audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
-                audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
-                Log.d("MediaModule", "Paused media");
-            } else {
-                // Media is not playing, start playback
-                audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
-                audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
-                Log.d("MediaModule", "Played media");
-            }
+            audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
+            audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
         }
     }
 
@@ -43,7 +37,6 @@ public class MediaModule extends ReactContextBaseJavaModule {
         if (audioManager != null) {
             audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
             audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_NEXT));
-            Log.d("MediaModule", "Skipped to next track");
         }
     }
 
@@ -53,7 +46,6 @@ public class MediaModule extends ReactContextBaseJavaModule {
         if (audioManager != null) {
             audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
             audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-            Log.d("MediaModule", "Skipped to previous track");
         }
     }
 }

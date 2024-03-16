@@ -16,16 +16,26 @@ const MediaControls = () => {
             });
     }, []);
 
-    const onPress = (action: string) => {
+    const onPress = async (action: string) => {
         if (action === 'playPause') {
-            MediaModule.playPauseMedia();
-            setIsPlaying((prevState) => !prevState);
+            await MediaModule.playPauseMedia();
         } else if (action === 'nextTrack') {
-            MediaModule.skipToNextTrack();
+            await MediaModule.skipToNextTrack();
         } else if (action === 'previousTrack') {
-            MediaModule.skipToPreviousTrack();
+            await MediaModule.skipToPreviousTrack();
         }
+
+        setTimeout(() => {
+            MediaModule.getPlaybackState()
+                .then((playbackState: number) => {
+                    setIsPlaying(playbackState === 3);
+                })
+                .catch((error: unknown) => {
+                    console.error(error);
+                });
+        }, 1200);
     };
+
 
     return (
         <View style={styles.container}>

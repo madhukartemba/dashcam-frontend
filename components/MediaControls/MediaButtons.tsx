@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        flexWrap: 'wrap'
     },
     button: {
         paddingHorizontal: 70,

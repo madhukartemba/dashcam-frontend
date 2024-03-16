@@ -10,19 +10,62 @@ export interface ActionMapping {
     [key: string]: ActionFunction;
 }
 
+const THRESHOLD_SPEED = 5;
+
 export const ActionMap: ActionMapping = {
-    'red,green': ({ speed }) => SoundManager.playGreenSound(),
-    'yellow,green': ({ speed }) => SoundManager.playGreenSound(),
+    'red,green': ({ speed }) => {
+        if (speed !== null && speed > THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playGreenSound()
+    },
+    'yellow,green': ({ speed }) => {
+        if (speed !== null && speed > THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playGreenSound()
+    },
     'null,green': ({ speed }) => {
-        if (speed && speed < 5) {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
             SoundManager.playGreenSound();
         }
     },
-    'green,yellow': ({ speed }) => SoundManager.playYellowSound(),
-    'null,yellow': ({ speed }) => SoundManager.playYellowSound(),
-    'green,red': ({ speed }) => SoundManager.playRedSound(),
-    'yellow,red': ({ speed }) => SoundManager.playRedSound(),
-    'null,red': ({ speed }) => SoundManager.playRedSound(),
+    'red,yellow': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playYellowSound()
+    },
+    'green,yellow': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playYellowSound()
+    },
+    'null,yellow': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playYellowSound()
+    },
+    'green,red': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playRedSound()
+    },
+    'yellow,red': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playRedSound()
+    },
+    'null,red': ({ speed }) => {
+        if (speed !== null && speed < THRESHOLD_SPEED) {
+            return;
+        }
+        SoundManager.playRedSound()
+    },
 };
 
 export class Actions {

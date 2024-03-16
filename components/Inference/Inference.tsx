@@ -7,12 +7,17 @@ import SoundManager from '../sound/SoundManager';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import ProgressBarComponent from '../ProgressBar';
 
+type Props = {
+    speedKmph: number | null;
+}
+
+
 const ACTIONS_BUFFER_SIZE_MULTIPLIER = 20
 
 const actionsInstance = new Actions(ActionMap, ACTIONS_BUFFER_SIZE_MULTIPLIER * 2);
 
 
-export const Inference = () => {
+export const Inference = ({ speedKmph }: Props) => {
     const { data, error } = useGetData();
 
     useEffect(() => {
@@ -36,7 +41,7 @@ export const Inference = () => {
             case 'recovery':
                 return <ProgressBarComponent text={`Recovering`} progress={data.recoveryPercent} />;
             case 'inference':
-                actionsInstance.act(data.trafficLightColor);
+                actionsInstance.act(data.trafficLightColor, { speed: speedKmph });
                 return <TrafficLight data={data} />;
             case 'idle':
                 return <ErrorPage text={`Server is idle`} />;

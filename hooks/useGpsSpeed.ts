@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
 
-const useGpsSpeed = () => {
+type Props = {
+    speedMs: number | null,
+    speedKmph: number | null,
+}
+
+const useGpsSpeed = (): Props => {
     const [speed, setSpeed] = useState(null);
 
     useEffect(() => {
-        let watchId = Geolocation.watchPosition(
+        const watchId = Geolocation.watchPosition(
             (position: any) => {
                 setSpeed(position.coords.speed);
             },
@@ -16,7 +21,7 @@ const useGpsSpeed = () => {
         );
 
         const intervalId = setInterval(() => {
-            watchId = Geolocation.getCurrentPosition(
+            Geolocation.getCurrentPosition(
                 (position: any) => {
                     setSpeed(position.coords.speed);
                 },
@@ -33,7 +38,10 @@ const useGpsSpeed = () => {
         };
     }, []);
 
-    return speed;
+    return {
+        speedMs: speed,
+        speedKmph: speed !== null ? (speed * 3.6) : null
+    };
 };
 
 export default useGpsSpeed;

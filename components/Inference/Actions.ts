@@ -1,19 +1,28 @@
 import SoundManager from "../sound/SoundManager";
 
-type ActionFunction = () => void;
+type ActionProps = {
+    speed: number | null;
+}
+
+type ActionFunction = (props: ActionProps) => void;
 
 export interface ActionMapping {
     [key: string]: ActionFunction;
 }
 
 export const ActionMap: ActionMapping = {
-    'red,green': () => SoundManager.playGreenSound(),
-    'yellow,green': () => SoundManager.playGreenSound(),
-    'green,yellow': () => SoundManager.playYellowSound(),
-    'null,yellow': () => SoundManager.playYellowSound(),
-    'green,red': () => SoundManager.playRedSound(),
-    'yellow,red': () => SoundManager.playRedSound(),
-    'null,red': () => SoundManager.playRedSound(),
+    'red,green': ({ speed }) => SoundManager.playGreenSound(),
+    'yellow,green': ({ speed }) => SoundManager.playGreenSound(),
+    'null,green': ({ speed }) => {
+        if (speed && speed < 5) {
+            SoundManager.playGreenSound();
+        }
+    },
+    'green,yellow': ({ speed }) => SoundManager.playYellowSound(),
+    'null,yellow': ({ speed }) => SoundManager.playYellowSound(),
+    'green,red': ({ speed }) => SoundManager.playRedSound(),
+    'yellow,red': ({ speed }) => SoundManager.playRedSound(),
+    'null,red': ({ speed }) => SoundManager.playRedSound(),
 };
 
 export class Actions {
@@ -37,7 +46,7 @@ export class Actions {
         this.bufferSize = bufferSize;
     }
 
-    act(index: string | null): void {
+    act(index: string | null, actionProps: ActionProps): void {
         let actionKey = `${this.prevIndex},${index}`;
         if (index === null) {
             this.noneCount += 1;
@@ -52,8 +61,7 @@ export class Actions {
         }
 
         if (this.actions[actionKey]) {
-            this.actions[actionKey]();
+            this.actions[actionKey](actionProps);
         }
     }
 }
-

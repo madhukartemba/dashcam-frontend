@@ -11,10 +11,14 @@ import { RootStackParamList } from '../App';
 import { Inference } from './Inference/Inference';
 import MediaControls from './MediaControls/MediaButtons';
 import Speedometer from './Speedometer';
+import useGpsSpeed from '../hooks/useGpsSpeed';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 
 function MainApp({ navigation }: Props) {
+
+    const { speedKmph } = useGpsSpeed();
+
     return (
         <View style={styles.container}>
             <View style={styles.settingsContainer}>
@@ -28,9 +32,9 @@ function MainApp({ navigation }: Props) {
                     <MediaControls />
                 </View>
                 <View style={styles.rightContent}>
-                    <Inference />
+                    <Inference speedKmph={speedKmph} />
                     <View style={styles.speedometer}>
-                        <Speedometer />
+                        <Speedometer speedKmph={speedKmph} />
                     </View>
                 </View>
             </View>

@@ -7,7 +7,7 @@ import SoundManager from '../sound/SoundManager';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import ProgressBarComponent from '../ProgressBar';
 
-const ACTIONS_BUFFER_SIZE_MULTIPLIER = 10
+const ACTIONS_BUFFER_SIZE_MULTIPLIER = 20
 
 const actionsInstance = new Actions(ActionMap, ACTIONS_BUFFER_SIZE_MULTIPLIER * 2);
 

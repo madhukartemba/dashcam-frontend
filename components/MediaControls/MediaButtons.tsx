@@ -6,7 +6,7 @@ const { MediaModule } = NativeModules;
 const MediaControls = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
-    useEffect(() => {
+    const fetchPlayingState = () => {
         MediaModule.getPlaybackState()
             .then((playbackState: number) => {
                 setIsPlaying(playbackState === 3);
@@ -14,6 +14,10 @@ const MediaControls = () => {
             .catch((error: unknown) => {
                 console.error(error);
             });
+    }
+
+    useEffect(() => {
+        fetchPlayingState()
     }, []);
 
     const onPress = async (action: string) => {
@@ -27,13 +31,7 @@ const MediaControls = () => {
         }
 
         setTimeout(() => {
-            MediaModule.getPlaybackState()
-                .then((playbackState: number) => {
-                    setIsPlaying(playbackState === 3);
-                })
-                .catch((error: unknown) => {
-                    console.error(error);
-                });
+            fetchPlayingState()
         }, 1500);
     };
 

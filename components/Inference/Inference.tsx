@@ -8,7 +8,7 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 
 const ACTIONS_BUFFER_SIZE_MULTIPLIER = 10
 
-const actionsInstance = new Actions(ActionMap);
+const actionsInstance = new Actions(ActionMap, ACTIONS_BUFFER_SIZE_MULTIPLIER * 2);
 
 
 export const Inference = () => {
@@ -36,7 +36,6 @@ export const Inference = () => {
                 return <Loading text={`Recovering ${(data.recoveryPercent).toFixed(2)}%`} />;
             case 'inference':
                 actionsInstance.act(data.trafficLightColor);
-                actionsInstance.updateBufferSize(ACTIONS_BUFFER_SIZE_MULTIPLIER * data.fps);
                 return <TrafficLight data={data} />;
             case 'idle':
                 return <ErrorPage text={`Server is idle`} />;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import DateTimeDisplay from './DateTimeDisplay';
 import TrafficLight from './Inference/TrafficLight';

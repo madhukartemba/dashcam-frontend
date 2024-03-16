@@ -3,6 +3,7 @@ package com.dashcam;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.session.PlaybackState;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -28,10 +29,14 @@ public class MediaModule extends ReactContextBaseJavaModule {
     public void playPauseMedia() {
         AudioManager audioManager = (AudioManager) getReactApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         if (audioManager != null) {
-            audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
-            audioManager.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE));
+            long eventTime = SystemClock.uptimeMillis();
+            KeyEvent downEvent = new KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
+            KeyEvent upEvent = new KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, 0);
+            audioManager.dispatchMediaKeyEvent(downEvent);
+            audioManager.dispatchMediaKeyEvent(upEvent);
         }
     }
+
 
     @ReactMethod
     public void skipToNextTrack() {

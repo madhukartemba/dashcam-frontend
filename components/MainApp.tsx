@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     speedometer: {
-        flex: 0.5
+        flex: 0.7
     }
 });
 

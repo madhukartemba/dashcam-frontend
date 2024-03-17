@@ -10,7 +10,7 @@ export interface ActionMapping {
     [key: string]: ActionFunction;
 }
 
-const THRESHOLD_SPEED = 5;
+const THRESHOLD_SPEED = 3;
 
 export const ActionMap: ActionMapping = {
     'red,green': ({ speed }) => {

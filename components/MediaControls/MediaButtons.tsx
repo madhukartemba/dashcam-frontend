@@ -32,7 +32,7 @@ const MediaControls = () => {
 
         setTimeout(() => {
             fetchPlayingState()
-        }, 1500);
+        }, 2500);
     };
 
 
@@ -73,8 +73,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap'
     },
     button: {
-        paddingHorizontal: 70,
-        paddingVertical: 30,
+        marginHorizontal: 60,
     },
     icon: {
         width: 60,

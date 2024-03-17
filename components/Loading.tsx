@@ -5,7 +5,7 @@ const Loading = ({ text }: {
     text: string
 }) => (
     <View style={styles.container}>
-        <ActivityIndicator size="large" color="white" />
+        <ActivityIndicator size={95} color="white" />
         <Text style={styles.text}>{text}</Text>
     </View>
 );

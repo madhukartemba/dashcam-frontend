@@ -1,7 +1,7 @@
 import { ActionType } from "./action";
 import { UPDATE_URL } from "./constants";
 
-const defaultUrl = "http://192.168.3.2:5000";
+const defaultUrl = "http://10.0.0.1:5000";
 
 export const urlReducer = (state = defaultUrl, action: ActionType) => {
     switch (action.type) {

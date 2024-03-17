@@ -69,15 +69,17 @@ const MediaControls = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap'
+        width: '100%',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
     },
     button: {
-        marginHorizontal: 60,
+        flex: 1,
+        maxWidth: 60,
     },
     icon: {
         width: 60,
-        height: 70,
+        height: 75,
         tintColor: 'white',
     },
 });

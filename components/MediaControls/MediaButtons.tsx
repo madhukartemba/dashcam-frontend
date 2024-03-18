@@ -74,8 +74,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     button: {
-        flex: 1,
-        maxWidth: 60,
+        backgroundColor: 'black'
     },
     icon: {
         width: 60,

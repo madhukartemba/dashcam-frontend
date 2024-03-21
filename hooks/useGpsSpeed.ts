@@ -30,7 +30,7 @@ const useGpsSpeed = (): Props => {
                 },
                 { enableHighAccuracy: true }
             );
-        }, 1000);
+        }, 100);
 
         return () => {
             Geolocation.clearWatch(watchId);

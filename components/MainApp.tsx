@@ -8,6 +8,7 @@ import { Inference } from './Inference/Inference';
 import MediaControls from './MediaControls/MediaButtons';
 import Speedometer from './Speedometer';
 import useGpsSpeed from '../hooks/useGpsSpeed';
+import { Dashcam } from './Dashcam/Dashcam';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'MainApp'> }
 

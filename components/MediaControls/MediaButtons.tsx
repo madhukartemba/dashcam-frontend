@@ -1,86 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { NativeModules, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  NativeModules,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
-const { MediaModule } = NativeModules;
+const {MediaModule} = NativeModules;
 
 const MediaControls = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-    const fetchPlayingState = () => {
-        MediaModule.getPlaybackState()
-            .then((playbackState: number) => {
-                setIsPlaying(playbackState === 3);
-            })
-            .catch((error: unknown) => {
-                console.error(error);
-            });
+  const fetchPlayingState = () => {
+    MediaModule.getPlaybackState()
+      .then((playbackState: number) => {
+        setIsPlaying(playbackState === 3);
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchPlayingState();
+  }, []);
+
+  const onPress = async (action: string) => {
+    if (action === 'playPause') {
+      await MediaModule.playPauseMedia();
+      setIsPlaying(!isPlaying);
+    } else if (action === 'nextTrack') {
+      await MediaModule.skipToNextTrack();
+    } else if (action === 'previousTrack') {
+      await MediaModule.skipToPreviousTrack();
     }
 
-    useEffect(() => {
-        fetchPlayingState()
-    }, []);
+    setTimeout(() => {
+      fetchPlayingState();
+    }, 2500);
+  };
 
-    const onPress = async (action: string) => {
-        if (action === 'playPause') {
-            await MediaModule.playPauseMedia();
-            setIsPlaying((isPlaying) => !isPlaying);
-        } else if (action === 'nextTrack') {
-            await MediaModule.skipToNextTrack();
-        } else if (action === 'previousTrack') {
-            await MediaModule.skipToPreviousTrack();
-        }
-
-        setTimeout(() => {
-            fetchPlayingState()
-        }, 2500);
-    };
-
-
-    return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => onPress('previousTrack')}
-                style={styles.button}>
-                <Image
-                    source={require('./backward-step-solid.png')}
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => onPress('playPause')}
-                style={styles.button}>
-                <Image
-                    source={isPlaying ? require('./pause-solid.png') : require('./play-solid.png')}
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => onPress('nextTrack')}
-                style={styles.button}>
-                <Image
-                    source={require('./forward-step-solid.png')}
-                    style={styles.icon}
-                />
-            </TouchableOpacity>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => onPress('previousTrack')}
+        style={styles.button}>
+        <Image
+          source={require('./backward-step-solid.png')}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => onPress('playPause')}
+        style={styles.button}>
+        <Image
+          source={
+            isPlaying
+              ? require('./pause-solid.png')
+              : require('./play-solid.png')
+          }
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => onPress('nextTrack')}
+        style={styles.button}>
+        <Image
+          source={require('./forward-step-solid.png')}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-around',
-        flexWrap: 'wrap',
-    },
-    button: {
-        backgroundColor: 'black'
-    },
-    icon: {
-        width: 60,
-        height: 75,
-        tintColor: 'white',
-    },
+  container: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+  },
+  button: {
+    backgroundColor: 'black',
+  },
+  icon: {
+    width: 60,
+    height: 75,
+    tintColor: 'white',
+  },
 });
 
 export default MediaControls;

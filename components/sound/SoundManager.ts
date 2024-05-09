@@ -2,31 +2,31 @@ import Sound from 'react-native-sound';
 
 Sound.setCategory('Playback', true);
 
-const SoundManager = {
-  startup: new Sound('startup.mp3', Sound.MAIN_BUNDLE),
-  red: new Sound('red.mp3', Sound.MAIN_BUNDLE),
-  green: new Sound('green.mp3', Sound.MAIN_BUNDLE),
-  yellow: new Sound('yellow.mp3', Sound.MAIN_BUNDLE),
-  error: new Sound('error.mp3', Sound.MAIN_BUNDLE),
+const startup = new Sound('startup.mp3', Sound.MAIN_BUNDLE);
+const red = new Sound('red.mp3', Sound.MAIN_BUNDLE);
+const green = new Sound('green.mp3', Sound.MAIN_BUNDLE);
+const yellow = new Sound('yellow.mp3', Sound.MAIN_BUNDLE);
+const error = new Sound('error.mp3', Sound.MAIN_BUNDLE);
 
+const SoundManager = {
   playStartupSound: () => {
-    SoundManager.startup.play();
+    startup.play();
   },
 
   playRedSound: () => {
-    SoundManager.red.play();
+    red.play();
   },
 
   playGreenSound: () => {
-    SoundManager.green.play();
+    green.play();
   },
 
   playYellowSound: () => {
-    SoundManager.yellow.play();
+    yellow.play();
   },
 
   playErrorSound: () => {
-    SoundManager.error.play();
+    error.play();
   },
 };
 

@@ -85,13 +85,19 @@ public class MyNotificationListenerService extends NotificationListenerService {
     }
 
     private static List<MediaController> getActiveMediaControllers(Context context) {
-        Objects.requireNonNull(context, "Context cannot be null");
+        try {
+            Objects.requireNonNull(context, "Context cannot be null");
 
-        MediaSessionManager mediaSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
-        if (mediaSessionManager == null) {
-            return Collections.emptyList();
+            MediaSessionManager mediaSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+            if (mediaSessionManager == null) {
+                return Collections.emptyList();
+            }
+
+            return mediaSessionManager.getActiveSessions(new ComponentName(context, NotificationListenerService.class));
+        } catch (Exception e) {
+            Toast.makeText(context, e.getMessage() + e, Toast.LENGTH_SHORT).show();
         }
 
-        return mediaSessionManager.getActiveSessions(new ComponentName(context, NotificationListenerService.class));
+        return Collections.emptyList();
     }
 }

@@ -1,56 +1,53 @@
-import React, {useEffect} from 'react';
-import {useGetData} from '../../hooks/useGetData';
+import React, { useEffect } from 'react';
+import { useGetData } from '../../hooks/useGetData';
 import Loading from '../Loading';
 import TrafficLight from './TrafficLight';
-import {ActionMap, Actions} from './Actions';
+import { ActionMap, Actions } from './Actions';
 import SoundManager from '../sound/SoundManager';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import ProgressBarComponent from '../ProgressBar';
 
 type Props = {
-  speedKmph: number | null;
-};
+    speedKmph: number | null;
+}
 
-const ACTIONS_BUFFER_SIZE_MULTIPLIER = 20;
 
-const actionsInstance = new Actions(
-  ActionMap,
-  ACTIONS_BUFFER_SIZE_MULTIPLIER * 2,
-);
+const ACTIONS_BUFFER_SIZE_MULTIPLIER = 20
 
-export const Inference = ({speedKmph}: Props) => {
-  const {data, error} = useGetData();
+const actionsInstance = new Actions(ActionMap, ACTIONS_BUFFER_SIZE_MULTIPLIER * 2);
 
-  useEffect(() => {
-    if (data && data.status === 'inference') {
-      SoundManager.playStartupSound();
+
+export const Inference = ({ speedKmph }: Props) => {
+    const { data, error } = useGetData();
+
+    useEffect(() => {
+        if (data && data.status == 'inference') {
+            SoundManager.playStartupSound()
+        }
+    }, [data?.status])
+
+
+    if (error) {
+
+        if (error.name == 'AbortError') {
+            return <ErrorPage text='Request Aborted' />
+        }
+
+        return <Loading text="Connecting" />;
     }
-  }, [data?.status, data]);
 
-  if (error) {
-    if (error.name === 'AbortError') {
-      return <ErrorPage text="Request Aborted" />;
+    if (data) {
+        switch (data.status) {
+            case 'recovery':
+                return <ProgressBarComponent text={`Recovering`} progress={data.recoveryPercent} />;
+            case 'inference':
+                actionsInstance.act(data.trafficLightColor, { speed: speedKmph });
+                return <TrafficLight data={data} />;
+            case 'idle':
+                return <ErrorPage text={`Server is idle`} />;
+            default:
+                return null;
+        }
     }
 
-    return <Loading text="Connecting" />;
-  }
-
-  if (data) {
-    switch (data.status) {
-      case 'recovery':
-        return (
-          <ProgressBarComponent
-            text={'Recovering'}
-            progress={data.recoveryPercent}
-          />
-        );
-      case 'inference':
-        actionsInstance.act(data.trafficLightColor, {speed: speedKmph});
-        return <TrafficLight data={data} />;
-      case 'idle':
-        return <ErrorPage text={'Server is idle'} />;
-      default:
-        return null;
-    }
-  }
 };

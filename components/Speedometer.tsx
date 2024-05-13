@@ -1,45 +1,48 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import useGpsSpeed from '../hooks/useGpsSpeed';
 
 type Props = {
-  speedKmph: number | null;
-};
+    speedKmph: number | null;
+}
 
-const Speedometer = ({speedKmph}: Props) => {
-  if (speedKmph == null) {
+const Speedometer = ({ speedKmph }: Props) => {
+
+
+    if (speedKmph == null) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>--</Text>
+                <Text style={styles.unit}> km/hr</Text>
+            </View>
+        );
+    }
+
+    const speed = speedKmph.toFixed(0);
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>--</Text>
-        <Text style={styles.unit}> km/hr</Text>
-      </View>
+        <View style={styles.container}>
+            <Text style={styles.text}>{speed}</Text>
+            <Text style={styles.unit}> km/hr</Text>
+        </View>
     );
-  }
-
-  const speed = speedKmph.toFixed(0);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{speed}</Text>
-      <Text style={styles.unit}> km/hr</Text>
-    </View>
-  );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: 'white',
-    fontSize: 50,
-    fontWeight: 'bold',
-  },
-  unit: {
-    color: 'white',
-    fontSize: 20,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    text: {
+        color: 'white',
+        fontSize: 50,
+        fontWeight: 'bold'
+    },
+    unit: {
+        color: 'white',
+        fontSize: 20,
+    },
 });
 
 export default Speedometer;
